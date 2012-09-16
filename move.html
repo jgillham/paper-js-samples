@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+
+<!-- Load Paper.js libray -->
+<script type="text/javascript" src="../paper.js"></script>
+
+<!-- Start Paperscript -->
+<script type="text/paperscript" canvas="myCanvas">
+  var canvas= document.getElementById(   'myCanvas' );
+
+  function onFrame(){
+    if( Key.isDown( 'left' ) )
+      character.turnLeft();
+
+    if( Key.isDown( 'right' ) )
+      character.turnRight();
+
+    if( Key.isDown( 'up' ) )
+      character.accel();
+
+    character.update();
+  }
+  var settings= {
+  }
+
+
+  var map= {
+    height: 500,
+    width: 1000
+  }
+  function Character( startX, startY ) {
+    var turnRate= 5;
+    var acceleration= 0.2;
+    var charWidth= 10;
+    var charHeight= 40;
+    var myPath= new Path();
+    myPath.strokeColor= 'black';
+    myPath.add( new Point( startX,                  startY - (charHeight / 2) ) );
+    myPath.add( new Point( startX - (charHeight / 2), startY + (charHeight / 2) ) );
+    myPath.add( new Point( startX + (charHeight / 2), startY + (charHeight / 2) ) );
+    myPath.closed= true;
+    var speed= 0.0;
+    var angle= -90.0; // North
+    return {
+      position:  ( function( xPos, yPos ){ 
+	var xPosition= xPos;
+	var yPosition= yPos;
+	return {
+	  x: this.xPosition,
+	  y: this.yPosition
+	}
+      } )( startX, startY ),
+      turnRight: function() {
+	angle+= turnRate;
+	myPath.rotate( turnRate );
+      },
+      turnLeft: function() {
+	angle-= turnRate;
+	myPath.rotate( -turnRate );
+      },
+      accel: function() {
+	speed+= acceleration;
+      },
+      update: function(){
+	myPath.position+= new Point( { angle: angle, length: speed } );
+      }
+    }
+  }
+  var character= new Character( 200, 200 );
+</script>
+</head>
+<body>
+<canvas id="myCanvas" resize=""></canvas>
+</body>
+</html>
