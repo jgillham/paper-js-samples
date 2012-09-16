@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+
+<!-- Load Paper.js libray -->
+<script type="text/javascript" src="../paper.js"></script>
+
+<!-- Start Paperscript -->
+<script type="text/paperscript" canvas="myCanvas">
+	var canvas= document.getElementById(   'myCanvas' );
+
+	function Object(xPos, yPos){
+		var myPath= new Path();
+		myPath.strokeColor= 'black';
+		myPath.add( new Point( xPos, yPos ) );
+		myPath.add( new Point( xPos + 100, yPos + 50 ) );
+		// insert a segment between the two existing
+		// segments in the path:
+		myPath.insert( 1, new Point( xPos + 30, yPos + 40 ) );
+		return {
+			position:  new function(xPos, yPos){ 
+				var xPosition= xPos;
+				var yPosition= yPos;
+				return {
+					x: this.xPosition,
+					y: this.yPosition
+				}
+			}
+		}
+	}
+
+	var objects= new Array();
+
+	for( i= 0; i< 50; ++i ){
+	  var x=Math.floor( ( Math.random() * canvas.width ) + 1 );
+	  var y=Math.floor( ( Math.random() * canvas.height ) + 1 );  
+	  objects.push( new Object( x, y ) ); 
+	}
+
+
+</script>
+</head>
+<body>
+<canvas id="myCanvas" resize=""></canvas>
+</body>
+</html>
