@@ -1,78 +1,161 @@
-<!DOCTYPE html>
+<!DOTYPE html>
+<!--
+  Author: Josh Gillham
+  Version: 9-16-12
+  Description:
+
+  Draws a triangle (the character) on the page. 
+
+  The player (he) can move the character forward by pressing the 'up' key. He can brake or reverse the character by pressing the 'down' key. He can turn the character by pressing the 'left' and 'right' keys.
+
+
+  The default html coding must be present (or we can't open this in a browser). The paperscript codes are written in the header but they may also be written in the body. The header will force the codes load while the body may not.
+-->
 <html>
-<head>
-<meta charset="utf-8" />
-<title></title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-<!-- Load Paper.js libray -->
-<script type="text/javascript" src="../paper.js"></script>
+    <!-- Load Paper.js libray. 
+          Notice 'src' must be the relative path of the filename.
+    -->
+    <script type="text/javascript" src="../paper.js"></script>
 
-<!-- Start Paperscript -->
-<script type="text/paperscript" canvas="myCanvas">
-  var canvas= document.getElementById(   'myCanvas' );
+    <!-- Signals the start of a paperscript. 
+          Notice the name of the canvas.    
+    -->
+    <script type="text/paperscript" canvas="myCanvas">
+      var canvas= document.getElementById(   'myCanvas' );
+      canvas.width  = window.innerWidth - 200;
+      canvas.height = window.innerHeight - 200;
 
-  function onFrame(){
-    if( Key.isDown( 'left' ) )
-      character.turnLeft();
+      /**
+       * onFrame is called every time paper draws on
+       *  the canvas.
+       */
+      function onFrame(){
+        // Handle key-presses
+        if( Key.isDown( 'left' ) )
+          character.turnLeft();
 
-    if( Key.isDown( 'right' ) )
-      character.turnRight();
+        if( Key.isDown( 'right' ) )
+          character.turnRight();
 
-    if( Key.isDown( 'up' ) )
-      character.accel();
+        if( Key.isDown( 'up' ) )
+          character.accel();
 
-    character.update();
-  }
-  var settings= {
-  }
+        if( Key.isDown( 'down' ) )
+          character.decel();
 
-
-  var map= {
-    height: 500,
-    width: 1000
-  }
-  function Character( startX, startY ) {
-    var turnRate= 5;
-    var acceleration= 0.2;
-    var charWidth= 10;
-    var charHeight= 40;
-    var myPath= new Path();
-    myPath.strokeColor= 'black';
-    myPath.add( new Point( startX,                  startY - (charHeight / 2) ) );
-    myPath.add( new Point( startX - (charHeight / 2), startY + (charHeight / 2) ) );
-    myPath.add( new Point( startX + (charHeight / 2), startY + (charHeight / 2) ) );
-    myPath.closed= true;
-    var speed= 0.0;
-    var angle= -90.0; // North
-    return {
-      position:  ( function( xPos, yPos ){ 
-	var xPosition= xPos;
-	var yPosition= yPos;
-	return {
-	  x: this.xPosition,
-	  y: this.yPosition
-	}
-      } )( startX, startY ),
-      turnRight: function() {
-	angle+= turnRate;
-	myPath.rotate( turnRate );
-      },
-      turnLeft: function() {
-	angle-= turnRate;
-	myPath.rotate( -turnRate );
-      },
-      accel: function() {
-	speed+= acceleration;
-      },
-      update: function(){
-	myPath.position+= new Point( { angle: angle, length: speed } );
+        // Update the position with the speed
+        character.update();
       }
-    }
-  }
-  var character= new Character( 200, 200 );
-</script>
-</head>
-<body>
-<canvas id="myCanvas" resize=""></canvas>
-</body>
+
+      /**
+       * This syntax makes Character behave like a class. The
+       *  parameters behave like a constructor.
+       *
+       * @param startX is the starting X coordinate
+       * @param startY is the starting Y coordinate
+       * @return the object with the data and methods.
+       */
+      function Character( startX, startY ) {
+        //BEGIN private fields
+        var TURN_RATE= 5;                           // Constant
+        var ACCELERATION= 0.2;                      // Constant
+        var MAX_SPEED= 7;                           // Constant
+
+        var CHARACTER_WIDTH= 10;                    // Constant
+        var CHARACTER_HEIGHT= 40;                   // Constant
+        var NORTH= -90.0;                           // Constant
+
+
+        var myPath= new Path();                     // Holds the lines
+        // NOTE: always surround division '/' with parantheses. VERY BAD!
+        var top= startY - (CHARACTER_HEIGHT / 2);   // Top Y-coordinate
+        var bottom= startY + (CHARACTER_HEIGHT / 2);// Bottom Y-coordinate
+        var left= startX - (CHARACTER_WIDTH / 2);   // Left X-coordinate
+        var right= startX + (CHARACTER_WIDTH / 2);  // Right X-coordinate
+        var speed= 0.0;                             // Starting
+        var angle= NORTH;                           // Starting
+        //END private fields
+
+        //BEGIN constructor
+        myPath.strokeColor= 'black';
+        // Here is the recipe to actually draw Character
+        myPath.add( new Point( startX, top ) );
+        myPath.add( new Point( left, bottom ) );
+        myPath.add( new Point( right, bottom ) );
+        // Draw line from end to beginning
+        myPath.closed= true;
+        //END constructor
+
+        /**
+         * Here there are the methods for this class.
+         *
+         * @return is used to provide the object.
+         */
+        // Open curly-brace without a name signals an object.
+        // NOTE: do not put a space b/t return and '{'. VERY BAD!
+        return {
+          // Here we define position as an anonomous class
+          position:
+          // This function sets position to an instance of the class
+          // The arguments are copied to private fields
+          ( function( xPos, yPos ){ 
+            //BEGIN private fields
+            var xPosition= xPos;
+            var yPosition= yPos;
+            //END private fields
+
+            // Here are the properties for this anonomous class
+            return {
+              x: this.xPosition,
+              y: this.yPosition
+            }
+          // Here we call the function with the parameters from Character
+          // This will return the object with the x and y properties
+          } )( startX, startY ),
+          // Define turnRight as a method which rotates the character
+          turnRight: function() {
+            angle+= TURN_RATE;
+            // The rotate method will rotate the lines from the path
+            myPath.rotate( TURN_RATE );
+          },
+          // Define turnRight as a method which rotates the character
+          turnLeft: function() {
+            angle-= TURN_RATE;
+            // Rotate will turn the lines in the path
+            myPath.rotate( -TURN_RATE );
+          },
+          // Define accel as method which increases the speed
+          //  but does not actually move the character.
+          accel: function() {
+            if( speed + ACCELERATION < MAX_SPEED )
+              speed+= ACCELERATION;
+          },
+          // Define decel as a method which decreases the speed
+          //  but does not actually move the character
+          decel: function(){
+            if( speed - ACCELERATION > -MAX_SPEED )
+              speed-= ACCELERATION;
+          },
+
+          // Define update as a method which will translate the
+          //  character at his current speed
+          update: function(){
+            if( speed > 0 )
+              myPath.position+= new Point( { angle: angle, length: speed } );
+            else
+              myPath.position-= new Point( { angle: angle, length: speed } );
+          }
+        }
+      }
+      // Create a new instance of Character
+      var character= new Character( 200, 200 );
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas" resize="" ></canvas>
+  </body>
 </html>
