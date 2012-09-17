@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+
+<!-- Load Paper.js libray -->
+<script type="text/javascript" src="../paper.js"></script>
+
+<!-- Start Paperscript -->
+<script type="text/paperscript" canvas="myCanvas">
+// Initialize circle
+var myCircle= new Path.Circle( new Point( 100, 70), 50 );
+// Set line color to black
+myCircle.strokeColor= 'black';
+// Turn on selection handles
+myCircle.selected= true;
+
+// Init the circle
+var oddCircle= new Path.Circle( new Point( 200, 170 ), 50 );
+// Set the line color to black
+oddCircle.strokeColor= 'black';
+// Turn on selection handles
+oddCircle.selected= true;
+
+// Remove the first segment
+oddCircle.removeSegment( 0 );
+
+// Initialize the circle
+var myCircle = new Path.Circle(new Point(100, 100), 50);
+// Set line color to black
+myCircle.fillColor = 'black';
+// This circle is never drawn
+myCircle.remove()
+</script>
+</head>
+<body>
+<canvas id="myCanvas" resize=""></canvas>
+</body>
+</html>
