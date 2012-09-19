@@ -1,36 +1,45 @@
 <!DOCTYPE html>
+<!--
+This example is like path01 except we draw a rectangle and select it.
+-->
 <html>
-<head>
-<meta charset="utf-8" />
-<title></title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-<!-- Load Paper.js libray -->
-<script type="text/javascript" src="../paper.js"></script>
+    <!-- Load Paper.js libray -->
+    <script type="text/javascript" src="paper.js"></script>
 
-<!-- Start Paperscript -->
-<script type="text/paperscript" canvas="myCanvas">
-var path = new Path();
-path.strokeColor= 'black';
-path.add(new Point(30, 75)); 
-path.add(new Point(30, 25)); 
-path.add(new Point(80, 25));
-path.add( new Point( 80, 75 ) );
-path.closed= true;
+    <!-- Start Paperscript -->
+    <script type="text/paperscript" canvas="myCanvas">
+      // Create a new instance of Path
+      var path = new Path();
+      // Set line color
+      path.strokeColor= 'black';
+      // Add the points of the rectangle
+      path.add(new Point(30, 75)); 
+      path.add(new Point(30, 25)); 
+      path.add(new Point(80, 25));
+      path.add( new Point( 80, 75 ) );
+      // Draw a line from begginning to end
+      path.closed= true;
 
-// Select the path, so we can see its handles:
-path.fullySelected= true
+      // Select the path, so we can see its handles:
+      path.fullySelected= true
 
-// Create a copy of the path and move it 100pt to the right:
-var copy= path.clone();
-copy.fullySelected= true;
-copy.position.x+= 100;
+      // Create a copy of the path and move it 100pt to the right:
+      var copy= path.clone();
+      copy.fullySelected= true;
+      copy.position.x+= 100;
 
-// Smooth the segments of the copy:
-copy.smooth();
+      // Smooth the segments of the copy:
+      // The copy will appear rounded
+      copy.smooth();
 
-</script>
-</head>
-<body>
-<canvas id="myCanvas" resize=""></canvas>
-</body>
+    </script>
+  </head>
+  <body>
+    <!--Set the canvas name-->
+    <canvas id="myCanvas" resize=""></canvas>
+  </body>
 </html>
