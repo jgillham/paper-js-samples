@@ -1,33 +1,19 @@
 <!DOCTYPE html>
-<!--
-Just a simple example how to draw connected lines in paperscript.
--->
 <html>
   <head>
     <meta charset="utf-8" />
     <title></title>
-
-    <!-- Load Paper.js libray -->
-    <script type="text/javascript" src="../paper.js"></script>
-
-    <!-- Start Paperscript -->
+    <script type="text/javascript" src="paper.js"></script>
     <script type="text/paperscript" canvas="myCanvas">
-      // Create a new instance of Path
       var myPath= new Path();
-      // Set line color
       myPath.strokeColor= 'black';
-      // Add points to connect with lines
       myPath.add( new Point(0, 0 ) );
       myPath.add( new Point( 100, 50 ) );
-
-      // insert a segment between the two existing
-      // segments in the path:
       myPath.insert( 1, new Point( 30, 40 ) );
 
     </script>
   </head>
   <body>
-  <!--Set the canvas ID-->
-  <canvas id="myCanvas" resize=""></canvas>
+    <canvas id="myCanvas" resize=""></canvas>
   </body>
 </html>

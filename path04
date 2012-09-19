@@ -5,7 +5,7 @@
 <title></title>
 
 <!-- Load Paper.js libray -->
-<script type="text/javascript" src="../paper.js"></script>
+<script type="text/javascript" src="paper.js"></script>
 
 <!-- Start Paperscript -->
 <script type="text/paperscript" canvas="myCanvas">
