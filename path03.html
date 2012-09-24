@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title></title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-<!-- Load Paper.js libray -->
-<script type="text/javascript" src="paper.js"></script>
+    <!-- Load Paper.js libray -->
+    <script type="text/javascript" src="paper.js"></script>
 
-<!-- Start Paperscript -->
-<script type="text/paperscript" canvas="myCanvas">
+    <!-- Start Paperscript -->
+    <script type="text/paperscript" canvas="myCanvas">
 
-// Initiate
-var myPath= new Path();
+      // Initiate
+      var myPath= new Path();
 
-// Set line color
-myPath.strokeColor= 'black';
+      // Set line color
+      myPath.strokeColor= 'black';
 
-// Add points
-myPath.add( new Point( 40, 90 ) );
-myPath.add( new Point( 90, 40 ) );
-myPath.add( new Point( 140, 90 ) );
+      // Add points
+      myPath.add( new Point( 40, 90 ) );
+      myPath.add( new Point( 90, 40 ) );
+      myPath.add( new Point( 140, 90 ) );
 
-// Draw line from the end point to the start
-myPath.closed = true;
-</script>
-</head>
-<body>
-<canvas id="myCanvas" resize=""></canvas>
-</body>
+      // Draw line from the end point to the start
+      myPath.closed = true;
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas" resize=""></canvas>
+  </body>
 </html>
