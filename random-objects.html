@@ -1,48 +1,80 @@
+<!--
+  Author: Josh Gillham
+  Version: 9-24-12
+  Description:
+    Draws red and blue triangles randomly throughtout the screen.
+
+    Ensure that paper.js is in the same folder.
+-->
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title></title>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
 
-<!-- Load Paper.js libray -->
-<script type="text/javascript" src="paper.js"></script>
+    <!-- Load Paper.js libray -->
+    <script type="text/javascript" src="paper.js"></script>
 
-<!-- Start Paperscript -->
-<script type="text/paperscript" canvas="myCanvas">
-	var canvas= document.getElementById(   'myCanvas' );
+    <!-- Start Paperscript -->
+    <script type="text/paperscript" canvas="myCanvas">
+      // This is only necessary when we need to the size ect.
+      var canvas= document.getElementById( 'myCanvas' );
 
-	function Object(xPos, yPos){
-		var myPath= new Path();
-		myPath.strokeColor= 'black';
-		myPath.add( new Point( xPos, yPos ) );
-		myPath.add( new Point( xPos + 100, yPos + 50 ) );
-		// insert a segment between the two existing
-		// segments in the path:
-		myPath.insert( 1, new Point( xPos + 30, yPos + 40 ) );
-		return {
-			position:  new function(xPos, yPos){ 
-				var xPosition= xPos;
-				var yPosition= yPos;
-				return {
-					x: this.xPosition,
-					y: this.yPosition
-				}
-			}
-		}
-	}
+      var TRIANGLE_COUNT= 50;
 
-	var objects= new Array();
+      /*
+       * Draws Triangle to the screen at a x and y position. 
+       *  randomly selects a color to fill the shape.
+       * @arg xPos the x position
+       * @arg yPos the y position
+       *
+       * @return a object with position.x & .y
+       */
+      function Triangle(xPos, yPos){
+        var myPath= new Path();
 
-	for( i= 0; i< 50; ++i ){
-	  var x=Math.floor( ( Math.random() * canvas.width ) + 1 );
-	  var y=Math.floor( ( Math.random() * canvas.height ) + 1 );  
-	  objects.push( new Object( x, y ) ); 
-	}
+        // Randomly choose red or blue
+        var color= Math.floor( ( Math.random() * 2 ) );
+        var strokeColor
+        if( color == 1 )
+          strokeColor= 'blue';
+        else
+          strokeColor= 'red';
+        myPath.fillColor= strokeColor;
 
+        // The border is also drawn
+        myPath.strokeColor= 'black';
+        myPath.add( new Point( xPos, yPos ) );
+        myPath.add( new Point( xPos + 100, yPos + 50 ) );
+        // insert a segment between the two existing
+        // segments in the path:
+        myPath.insert( 1, new Point( xPos + 30, yPos + 40 ) );
+        myPath.closed= true;
 
-</script>
-</head>
-<body>
-<canvas id="myCanvas" resize=""></canvas>
-</body>
+        // The triangle gives access to its position
+        return {
+          position:  new function(xPos, yPos){ 
+            var xPosition= xPos;
+            var yPosition= yPos;
+            return {
+              x: this.xPosition,
+              y: this.yPosition
+            }
+          }
+        }
+      }
+
+      // Generate a plethora of triangles at random positions
+      var objects= new Array();
+      for( i= 0; i< TRIANGLE_COUNT; ++i ){
+        var x=Math.floor( ( Math.random() * canvas.width ) + 1 );
+        var y=Math.floor( ( Math.random() * canvas.height ) + 1 );  
+        objects.push( new Triangle( x, y ) ); 
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Link the canvas to "myCanvas" -->
+    <canvas id="myCanvas" resize=""></canvas>
+  </body>
 </html>
