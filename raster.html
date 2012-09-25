@@ -1,20 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html><head>
-  
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-  <title>raster</title>
+<!--
+  Author: Josh Gillham
+  Version: 9-24-12
+  Descriptio:
+    Draws an apple image onto the canvas.
 
-  
-  
-  <script type="text/javascript" src="paper.js"></script>
-  
-  <script type="text/paperscript" canvas="myCanvas">
-var img= new Raster( 'test' );
+    Ensure that apple.bmp is in the same folder.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <title>Raster</title>
 
-  </script>
-</head><body>
-<canvas id="myCanvas" resize=""></canvas><img style="width: 32px; height: 32px; display: none;" alt="" src="../../../cc/C/p3/apple.bmp" id="test"> <br>
-
-<br>
-
-</body></html>
+    <!-- Load Paper.js libray -->
+    <script type="text/javascript" src="paper.js"></script>
+    
+    <!-- Start Paperscript -->
+    <script type="text/paperscript" canvas="myCanvas">
+      // Load the apple image
+      var img= new Raster( 'apple' );
+      // Put it in the center of the canvas 
+      img.position= view.bounds.center;
+    </script>
+  </head>
+  <body>
+    <!-- Link the canvas -->
+    <canvas id="myCanvas" resize=""></canvas>
+    <!-- Embed the image resource -->
+    <img style="width: 32px; height: 32px; Display: none;" alt="" src="apple.bmp" id="apple">
+  </body>
+</html>
