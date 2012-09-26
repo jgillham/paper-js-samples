@@ -36,6 +36,8 @@
        *  the canvas.
        */
       function onFrame(){
+        // Update the position with the speed
+        character.update();
         // Handle key-presses
         if( Key.isDown( 'left' ) )
           character.turnLeft();
@@ -49,18 +51,31 @@
         if( Key.isDown( 'down' ) )
           character.decel();
 
-        // Update the position with the speed
-        character.update();
-
-        for( i= 0; i < objects.length; ++i ) {
+alert( objects.length );
+// It doesn't want to stay in the loop        
+alert( 3333 );
+        for( i= 0; i < objects.length; i++ ) {
           var block= objects[ i ];
           var charPath= character.path;
+	  alert( i+": "+block);
           // Does not like the following
           //block.containsPath( charPath );
-          
-          //if( objects[ i ].containsPath( character.path ) )
-          //  character.stop();
+        
+// WHY IS THIS NOT WORKING?!!!
+          if( block.containsPath( charPath ) ) {
+	  alert( "found" );
+	    //alert( character.angle );
+	    //character.angle= -character.angle;
+            //alert( character.angle );
+	    //character.update();
+            character.stop();
+
+	    break;
+	  }
+	  alert( 1111 );
+
         }
+	alert( 2222 );
         
       }
 
@@ -159,9 +174,11 @@
           update: function(){
             if( speed > 0 )
               myPath.position+= new Point( { angle: angle, length: speed } );
-            else
+            else if( speed < 0 )
               myPath.position-= new Point( { angle: angle, length: speed } );
           },
+	  speed: speed,
+	  angle: angle,
 
           path: myPath,
 
@@ -186,18 +203,23 @@
           bottom: bottom,
           contains: function( point ) {
             if( point.x >= left 
-             || point.x <= right 
-             || point.y >= top
-             || point.y <= bottom )
+             && point.x <= right 
+             && point.y >= top
+             && point.y <= bottom )
               return true;
             return false;
           },
-          containsPath: function( path ) {
+          containsPath: function( path  ) {
             var segmentsArray= path.segments;
-            for( i= 0; i < segmentsArray.length; ++i ) {
-              if( contains( segmentArray[ i ] ) )
-                return true;
+
+
+            for( i= 0; i < segmentsArray.length; i++ ) {
+	      var test= segmentsArray[i].point;
+	      var test2= this.contains( test );
+	      if( test2 )
+	        return test2
             }
+            return false;
           }
 
         }
@@ -205,7 +227,7 @@
 
       // Generate a plethora of triangles at random positions
       var objects= new Array();
-      for( i= 0; i< 10; ++i ){
+      for( i= 0; i< 3; ++i ){
         var x=Math.floor( ( Math.random() * canvas.width ) + 1 );
         var y=Math.floor( ( Math.random() * canvas.height ) + 1 );  
         objects.push( new Block( x, y, x + 50, y + 50 ) ); 
