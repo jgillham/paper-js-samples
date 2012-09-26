@@ -25,9 +25,11 @@
           Notice the name of the canvas.    
     -->
     <script type="text/paperscript" canvas="myCanvas">
-      var canvas= document.getElementById(   'myCanvas' );
-      canvas.width  = window.innerWidth - 200;
-      canvas.height = window.innerHeight - 200;
+      // Had a problem with the following lines not sizing
+      //  the window properly.
+      //var canvas= document.getElementById(   'myCanvas' );
+      //canvas.width  = window.innerWidth - 200;
+      //canvas.height = window.innerHeight - 200;
 
       /**
        * onFrame is called every time paper draws on
