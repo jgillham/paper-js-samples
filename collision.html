@@ -28,8 +28,8 @@
       // Had a problem with the following lines not sizing
       //  the window properly.
       var canvas= document.getElementById(   'myCanvas' );
-      //canvas.width  = window.innerWidth - 200;
-      //canvas.height = window.innerHeight - 200;
+      canvas.width  = window.innerWidth - 20;
+      canvas.height = window.innerHeight - 20;
 
       /**
        * onFrame is called every time paper draws on
@@ -58,13 +58,22 @@
         var hasCollided= false;
         for(var i= 0; i < objects.length; i++ ) {
           if( objects[ i ].containsPath( preview ) ) {
-            character.stop();
             hasCollided= true;
 	  }
         }
+        var canvasRect= new Rectangle( 0, 0, canvas.width, canvas.height );
+        var points= preview.segments;
+        for( var i= 0; i < points.length; ++i ) {
+          if( !canvasRect.contains( points[ i ].point ) ) {
+            hasCollided= true;
+          }
+        }
         preview.remove();
+
         if( !hasCollided ) {
           character.update( );
+        } else {
+          character.stop();
         }
       }
 
