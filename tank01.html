@@ -96,7 +96,6 @@
         var NORTH= -90.0;                           // Constant
 
 
-        var myPath= new Path();                     // Holds the lines
         // NOTE: always surround division '/' with parantheses. VERY BAD!
         var top= startY - (CHARACTER_HEIGHT / 2);   // Top Y-coordinate
         var bottom= startY + (CHARACTER_HEIGHT / 2);// Bottom Y-coordinate
@@ -106,15 +105,12 @@
         var angle= NORTH;                           // Starting
         var angleChange= 0.0;
         //END private fields
+        var myPath= new Path();
 
         //BEGIN constructor
-        myPath.strokeColor= 'black';
-        // Here is the recipe to actually draw Character
-        myPath.add( new Point( startX, top ) );
-        myPath.add( new Point( left, bottom ) );
-        myPath.add( new Point( right, bottom ) );
-        // Draw line from end to beginning
-        myPath.closed= true;
+        var img= new Raster( 'tank' );
+        img.position= view.bounds.center;
+        //new Point( startx, starty );
         //END constructor
 
         /**
@@ -180,7 +176,7 @@
           },
           update: function(){
             angle+= angleChange;
-            this.updatei( myPath );
+            this.updatei( img );
             angleChange= 0.0;
           },
 
@@ -209,7 +205,6 @@
                                     new Point( right, bottom ) );
 	border.closed= true;
 	border.strokeColor= 'black';
-
         return {
           left: left,
           top: top,
