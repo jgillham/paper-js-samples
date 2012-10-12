@@ -118,6 +118,7 @@
         var hitBox= Path.Rectangle( new Point( newPosition.x - ( img.width / 2 ), newPosition.y - ( img.height / 2 ) ), 
                                   new Point( newPosition.x + ( img.width / 2 ), newPosition.y + ( img.height / 2 ) ) );
         hitBox.strokeColor= 'black';
+        hitBox.visible= false;
         //new Point( startx, starty );
         //END constructor
 
@@ -214,8 +215,11 @@
                                     new Point( right, bottom ) );
 	border.closed= true;
 	border.strokeColor= 'black';
-        //border.visible= false;
-        //var img= new Raster( 'building' );
+        border.visible= false;
+        var img= new Raster( 'hangor' );
+        img.position.x= left;
+        img.position.y= top;
+        img.fitBounds( border.bounds );
         return {
           left: left,
           top: top,
@@ -258,5 +262,6 @@
   <body>
     <canvas id="myCanvas" resize="" ></canvas>
     <img style="width: 32px; height: 32px; Display: none;" alt="" src="tank.gif" id="tank">
+    <img style="width: 32px; height: 32px; Display: none;" alt="" src="hangor.gif" id="hangor">
   </body>
 </html>
