@@ -1,6 +1,7 @@
 GOAL: To provide samples with paperscript.
 
 Game project to do list:
+0. Add firction to the tank, slow down if no movement given.
 1. Add bullets to the game (get the tank to shoot stuff)
 2. Add bad guys to shoot at
 3. Make buildings explode or be damaged when hit with a tank bullet
