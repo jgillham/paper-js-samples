@@ -14,7 +14,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Browser Game</title>
     <style type="text/css" media="screen">
         canvas, img { display:block; margin:1em ; border:1px solid black; }
             canvas { background:url(d.jpg) }
@@ -32,8 +32,8 @@
       // Had a problem with the following lines not sizing
       //  the window properly.
       var canvas= document.getElementById(   'myCanvas' );
-      canvas.width  = window.innerWidth - 20;
-      canvas.height = window.innerHeight - 20;
+      canvas.width  = window.innerWidth - 40;
+      canvas.height = window.innerHeight - 40;
 
       /**
        * onFrame is called every time paper draws on
@@ -93,7 +93,7 @@
         //BEGIN private fields
         var TURN_RATE= 5;                           // Constant
         var ACCELERATION= 0.2;                      // Constant
-        var MAX_SPEED= 7;                           // Constant
+        var MAX_SPEED= 4;                           // Constant
 
         var CHARACTER_WIDTH= 10;                    // Constant
         var CHARACTER_HEIGHT= 40;                   // Constant
