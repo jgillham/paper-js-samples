@@ -1,9 +1,12 @@
 GOAL: To provide samples with paperscript.
 
-Resources:
-http://git-scm.com/book
+Paper.js Resources:
 http://paperjs.org/reference/
 
+Git Resources:
+http://git-scm.com/book
+http://gitready.com
+http://gitfu.wordpress.com/
 
 Game project to do list:
 0. Add firction to the tank, slow down if no movement given.
