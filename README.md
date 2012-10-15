@@ -2,6 +2,8 @@ GOAL: To provide samples with paperscript.
 
 Resources:
 <a ref="http://git-scm.com/book">Git book</a>
+<br>
+<br>
 http://paperjs.org/reference/
 
 
