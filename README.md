@@ -1,5 +1,3 @@
-<br>
-
 Paper.js Resources:
 <br>
 <a ref="http://paperjs.org/reference">Paper.js</a>
