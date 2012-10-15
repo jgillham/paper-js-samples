@@ -1,3 +1,5 @@
+Download Git Client: <a ref="windows.github.com">Windows</a>,
+
 Paper.js Resources:
 <br>
 <a ref="http://paperjs.org/reference">Paper.js</a>
@@ -29,26 +31,49 @@ Game project to do list:
 #1 I) Create a test to make bullets move acrossed the screen. 
 <br>
   a) Create a small test example to show a moving bullet acrossed the canvas.
+<br>
     i. Create or download an image to use (I am using Gimp).
+<br>
     ii. Embed the image into the HTML file.
+<br>
     iii. Load the image with the Raster class.
+<br>
     iv. Draw the image on the center of the screen.
+<br>
     v. Put code in onFrame() to make the bullet move acrossed the screen.
 <br>
   b) Copy the test in (a) and modify it with a class to contain the bullet.
+<br>
     i. Create a constructor that will spawn the bullet at an x and y position, an angle, and a speed.
+<br>
     ii. Create an action in the Bullet class to update the bullet's position called update().
+<br>
     iii. Use update() in onFrame() to show the bullet moving.
+<br>
   NOTE: onFrame() happens every 1/60th of a second. 30 Seconds will be 30 * 60 or 1800 onFrame() events.
+<br>
+  c) Copy (b) and modify it to fire many bullets.
+<br>
+    i. Create an array to hold the bullets.
+<br>
+    ii. Add a bullet every second with up to 5 bullets.
+<br>
+  d) Copy (c) and modify it to fire bullets repeatedly every second.
+<br>
+    i. Delete the bullet when it leaves the screen.
+<br>
+    ii. Continue spawning bullets with no limits.
 <br>
 #1 II) Implement Bullet into the game.
 <br>
-  c) Reuse the class from (b) to make the take fire the bullet.
+  e) Reuse the code from (d) to make the take fire the bullet.
+<br>
     i. All the bullets in the game will be contained in an Array class.
+<br>
     i. The space bar will spawn the bullet.
+<br>
     ii. The onFrame() event will update all the bullets' positions in the array.
 <br>
-
 
 #2 I) Enemies move randomly
 <br>
