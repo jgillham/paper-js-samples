@@ -42,3 +42,20 @@ Detailed Steps to finish todo #1:
     ii. The onFrame() event will update the bullet's position.
     iii. Each building will check the bullet to see if it is inside.
     iv. When the building is hit its image will be changed to a broken building.
+
+2. Add bad guys
+  GOAL: Enemies pursue character
+  a) Spawn an enemy.
+  b) Create an Enemy class.
+  c) Move the enemy randomly around the screen.
+  d) Add collision detection.
+  e) Enemies move towards character.
+  f) Enemies have stop advancing towards character at a distance.
+
+Add status updates in real time (score, kills, deaths, bullets left, ect...)
+  GOAL: Game HUD.
+  a) Create an example with a text field that increments.
+  b) Create an example of paper.js and the text field together.
+  c) Add a text field for each stat we want to display.
+  d) Integrate with the game.
+
