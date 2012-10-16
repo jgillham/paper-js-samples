@@ -74,7 +74,7 @@ Git:
 <br>
 
 <h3>&#35;4 I) Create an test to show updating feilds along with paper.js.</h3>
-<h4>&nbsp;&nbsp;a) Create an example with a text field that increments.</h4>
+<h4>&nbsp;&nbsp;a) Create an example with a text field that increments. DONE</h4>
 <h4>&nbsp;&nbsp;b) Create an example of paper.js and the text field together.</h4>
 
 <h3>&#35;4 II) The game updates stats to the HUD.</h3>
