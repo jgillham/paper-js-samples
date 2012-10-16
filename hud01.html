@@ -1,0 +1,112 @@
+<!--
+  Author: Josh Gillham
+  Version: 10-14-12
+  Descriptio:
+    Repeatly fires unlimited bullets. Bullets are deleted once they leave the screen.
+
+    Ensure that apple.bmp is in the same folder.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <title>Moving apple</title>
+
+    <!-- Load Paper.js libray -->
+    <script type="text/javascript" src="paper.js"></script>
+    
+    <!-- Start Paperscript -->
+    <script type="text/paperscript" canvas="myCanvas">
+    document.getElementById('lbl').innerHTML = 'your tip has been submitted!';
+      // Get a copy of the canvas.
+      var canvas= document.getElementById( 'myCanvas' );
+      // Get a rectangle for the outside border.
+      var canvasRect= new Path.Rectangle( 2, 2, canvas.width - 25, canvas.height );
+      // So we can see the border.
+      canvasRect.strokeColor= 'red';
+      canvasRect.visible= true;
+      // Holds all the bullets in the game.
+      var allBullets= new Array();
+      // Create a instance at the center of the screen with
+      //  an angle of 0.5 and a speed of 2.
+      var addBullet= function() {
+        allBullets.push( new Bullet( view.bounds.center, .5, 20 ) );
+      }
+      // Add the first bullet
+      addBullet();
+      // Count each onFrame() call.
+      var counter= 0;
+      // Called every 1/60th of a second.
+      function onFrame( ) {
+        // Count every onFrame event.
+        ++counter;
+        if( counter == 60 ) {
+          // Reset the counter
+          counter= 0;
+        }
+        if( counter % 6  == 1  ) { 
+          // Allow a maximum of 5 bullets.
+          if( allBullets.length < 5 ) {
+            // Add a new instance into the array.
+            addBullet();
+          }
+        }
+
+        document.getElementById('lbl').innerHTML = allBullets[ 0 ].image.bounds;
+        //alert( allBullets[ 0 ].position );
+        // Loop through all bullets.
+        for( var i= 0; i < allBullets.length; ++i ) {
+          //alert( canvasRect.bounds ); 
+          //alert( allBullets[ i ].bounds );
+          if( canvasRect.bounds.contains( allBullets[ i ].image.bounds ) ) {
+            // Move each bullet acrossed the screen.
+            allBullets[ i ].update();
+          } else {
+            allBullets[ i ].image.remove();
+            
+            //alert( "done" );
+            // Remove that array entry.
+            allBullets.splice( i, 1 );
+          }
+        }
+      }
+      /**
+       * Creates a new bullet with these params. The image is loaded and
+       *  placed at position. Everytime update is called, bullet is moved
+       *  by angle at speed.
+       *
+       * @arg position the starting position.
+       * @arg angle the starting angle.
+       * @arg speed the starting speed.
+       * 
+       * @return a new instance of Bullet with the following methods:
+       *  -update() moves the bullet.
+       */
+      function Bullet( position, angle, speed ) {
+        // Load the image.
+        var img= new Raster( 'apple' );
+        // Set the image position
+        img.position= position;
+        return {
+          /**
+           * Moves the bullet along angle at a speed.
+           */
+          update: function() {
+            img.position+= new Point( { angle: angle, length: speed } );
+          },
+          image: img
+        };
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Embed the image resource -->
+    <img style="width: 32px; height: 32px; Display: none;" alt="" src="apple.bmp" id="apple">
+    <label id="lbl2">test</label>
+    <label id="lbl">test</label>
+    <label id="lbl3">test</label>
+    <label id="lbl4">test</label>
+    <!-- Link the canvas -->
+    <canvas id="myCanvas" resize=""></canvas>
+  </body>
+</html>
