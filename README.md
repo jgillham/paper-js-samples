@@ -49,7 +49,7 @@ Git:
 <h4>&nbsp;&nbsp;c) Copy (b) and modify it to fire many bullets. DONE</h4>
 &nbsp;&nbsp;&nbsp;&nbsp;i. Create an array to hold the bullets.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ii. Add a bullet every second with up to 5 bullets.<br>
-<h4>&nbsp;&nbsp;d) Copy (c) and modify it to fire bullets repeatedly every second.</h4>
+<h4>&nbsp;&nbsp;d) Copy (c) and modify it to fire bullets repeatedly every second. DONE</h4>
 &nbsp;&nbsp;&nbsp;&nbsp;i. Delete the bullet when it leaves the screen.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ii. Continue spawning bullets with no limits.<br>
 <br>
