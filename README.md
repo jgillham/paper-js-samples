@@ -34,19 +34,19 @@ Git:
 <br><br>
 
 <h2>Detailed Project Outline:</h2>
-<h3>&#35;1 I) Create a test to make bullets move acrossed the screen.</h3>
-<h4>&nbsp;&nbsp;a) Create a small test example to show a moving bullet acrossed the canvas.</h4>
+<h3>&#35;1 I) Create a test to make bullets move acrossed the screen. DONE</h3> 
+<h4>&nbsp;&nbsp;a) Create a small test example to show a moving bullet acrossed the canvas. DONE</h4>
 &nbsp;&nbsp;&nbsp;&nbsp;i. Create or download an image to use (I am using Gimp).<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ii. Embed the image into the HTML file.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;iii. Load the image with the Raster class.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;iv. Draw the image on the center of the screen.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;v. Put code in onFrame() to make the bullet move acrossed the screen.<br>
-<h4>&nbsp;&nbsp;b) Copy the test in (a) and modify it with a class to contain the bullet.</h4>
+<h4>&nbsp;&nbsp;b) Copy the test in (a) and modify it with a class to contain the bullet. DONE</h4>
 &nbsp;&nbsp;&nbsp;&nbsp;i. Create a constructor that will spawn the bullet at an x and y position, an angle, and a speed.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ii. Create an action in the Bullet class to update the bullet's position called update().<br>
 &nbsp;&nbsp;&nbsp;&nbsp;iii. Use update() in onFrame() to show the bullet moving.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;NOTE: onFrame() happens every 1/60th of a second. 30 Seconds will be 30 * 60 or 1800 onFrame() events.<br>
-<h4>&nbsp;&nbsp;c) Copy (b) and modify it to fire many bullets.</h4>
+<h4>&nbsp;&nbsp;c) Copy (b) and modify it to fire many bullets. DONE</h4>
 &nbsp;&nbsp;&nbsp;&nbsp;i. Create an array to hold the bullets.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ii. Add a bullet every second with up to 5 bullets.<br>
 <h4>&nbsp;&nbsp;d) Copy (c) and modify it to fire bullets repeatedly every second.</h4>
@@ -76,8 +76,7 @@ Git:
 <h3>&#35;4 I) Create an test to show updating feilds along with paper.js.</h3>
 <h4>&nbsp;&nbsp;a) Create an example with a text field that increments.</h4>
 <h4>&nbsp;&nbsp;b) Create an example of paper.js and the text field together.</h4>
-<h3>&#35;4 II) The game updates stats to the HUD.</h3>
-<br>
 
+<h3>&#35;4 II) The game updates stats to the HUD.</h3>
 <h4>&nbsp;&nbsp;c) Add a text field for each stat we want to display.</h4>
 <h4>&nbsp;&nbsp;d) The game should update the fields.</h4>
