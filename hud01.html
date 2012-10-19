@@ -9,7 +9,7 @@
   <head>
     <!-- Formatting information -->
     <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-	<!-- Page title -->
+    <!-- Page title -->
     <title>Clock</title>
     <!-- Load Paper.js libray -->
     <script type="text/javascript" src="paper.js"></script>
@@ -17,15 +17,15 @@
     <script type="text/paperscript" canvas="myCanvas">
       // Called every 1/60th of a second.
       function onFrame( ) {
-	    // Get the current system time.
-		var now = new Date();
-		// Update clock with current time.
-		document.getElementById('clock').innerHTML = now;
+        // Get the current system time.
+        var now = new Date();
+        // Update clock with current time.
+        document.getElementById('clock').innerHTML = now;
       }
     </script>
   </head>
   <body>
-	<!-- Displays the system time -->
+    <!-- Displays the system time -->
     <label id="clock">test</label>
   </body>
 </html>
