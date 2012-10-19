@@ -14,11 +14,8 @@ var music= document.getElementById(   'bmusic' );
 music.src= "DST-AngryMod.ogg";
 var counter= 0;
 function onFrame() {
-if( counter == 300 ) {
-music.src= "DST-Robotix.ogg";
-}
 if( counter == 600 ) {
-music.src= "DST-Synth5.ogg";
+music.src= "DST-DXT.ogg";
 }
 if( counter == 900 ) {
 music.src= "";
@@ -37,7 +34,6 @@ music.src= "";
     path.lineTo(start + [ 100, -50 ]);
   </script>
 </head><body>
-Changes tracks at 5 seconds. <br>
 Changes tracks at 10 seconds. <br>
 Stops playing music at 15 seconds. <br>
 <canvas id="myCanvas" resize=""></canvas>
