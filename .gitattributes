@@ -3,3 +3,5 @@
 *.jpg binary
 *.gif binary
 *.md text
+*.ogg binary
+*.mp3 binary

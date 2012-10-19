@@ -73,10 +73,69 @@ Git:
 <h4>&nbsp;&nbsp;f) Implement the finished class into tank game.</h4>
 <br>
 
+
+<h3>&#35;3 I) The Block class will show damaged buildings when hit. </h3>
+<h4>&nbsp;&nbsp;a) Create a test to display a block in the center of the screen.</h4>
+<h4>&nbsp;&nbsp;b) Copy (a) and add a method to inflict damage on the building.</h4>
+<br>
+
+<h3>&#35;3 II) Make the tank bullets damage the buildings. </h3>
+<h4>&nbsp;&nbsp;a) Check bullets for collsions with the buildings. </h4>
+<h4>&nbsp;&nbsp;b) Damage the buildings on collision. </h4>
+<h4>&nbsp;&nbsp;b) Delete the bullet. </h4>
+<br>
+
 <h3>&#35;4 I) Create an test to show updating feilds along with paper.js.</h3>
 <h4>&nbsp;&nbsp;a) Create an example with a text field that increments. DONE</h4>
 <h4>&nbsp;&nbsp;b) Create an example of paper.js and the text field together.</h4>
+<br>
 
 <h3>&#35;4 II) The game updates stats to the HUD.</h3>
 <h4>&nbsp;&nbsp;c) Add a text field for each stat we want to display.</h4>
 <h4>&nbsp;&nbsp;d) The game should update the fields.</h4>
+<br>
+
+<h3>&#35;5 I) Hear a sond along with paper.js.</h3>
+<h4>&nbsp;&nbsp;a) Create a test of a sound playing. </h4>
+<br>
+
+<h3>&#35;5 II) Create a Sound class.</h3>
+<h4>&nbsp;&nbsp;a) Constructor takes the name or id of the sound. </h4>
+<h4>&nbsp;&nbsp;b) Create a method to play the sound. </h4>
+<br>
+
+<h3>&#35;5 III) Use the Sound class in the game. </h3>
+<h4>&nbsp;&nbsp;a) Play a sound when the tank fires a bullet. </h4>
+<h4>&nbsp;&nbsp;a) Play a sound something explodes. </h4>
+<br>
+
+<h3>&#35;6 I) Create an animation test showing a explosion.</h3>
+<br>
+
+<h3>&#35;6 II) Create an Animation class.</h3>
+<br>
+
+<h3>&#35;6 III) Put Animation into the game. </h3>
+<br>
+
+<h3>&#35;7 I) Hear music playing along with paper.js.</h3>
+<h4>&nbsp;&nbsp;a) Create a test of music playing. </h4>
+&nbsp;&nbsp;&nbsp;&nbsp;i. Download a music track. DONE <br>
+&nbsp;&nbsp;&nbsp;&nbsp;ii. Get it to play by itself. DONE <br>
+
+<h4>&nbsp;&nbsp;b) Modify (a) to work with paper.js. DONE</h4>
+<h4>&nbsp;&nbsp;c) Modify (b) to change tracks. DONE</h4>
+<br>
+
+<h3>&#35;7 II) Create a Music class. </h3>
+<h4>&nbsp;&nbsp;a) Constructor should take an music id or file. </h4>
+<h4>&nbsp;&nbsp;b) Should have a method to start playing. </h4>
+<h4>&nbsp;&nbsp;c) Should have a method to stop playing. </h4>
+<h4>&nbsp;&nbsp;d) Should have a method to change tracks. </h4>
+<br>
+
+<h3>&#35;7 III) Put the test into the game. </h3>
+<h4>&nbsp;&nbsp;a) Should change tracks every so often. </h4>
+<br>
+
+
