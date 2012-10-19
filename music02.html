@@ -1,29 +1,41 @@
+<!--
+  Author: Josh Gillham
+  Version: 10-18-12
+  Description:
+    Shows paper.js and background music in cooperation.
+-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html><head>
+<html>
+  <head>
   
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-  <title>test paper.js</title>
-<embed id="bmusic" loop="true" hidden="true" >
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <title>Music and Paper.js</title>
+    <!-- We need the id for later. -->
+    <embed id="bmusic" loop="true" hidden="true" >
   
-<!-- Load the Paper.js library -->
-  <script type="text/javascript" src="paper.js"></script>
-  <!-- Define inlined PaperScript associate it with myCanvas -->
+    <!-- Load the Paper.js library -->
+    <script type="text/javascript" src="paper.js"></script>
+    <!-- Define inlined PaperScript associate it with myCanvas -->
   
-  <script type="text/paperscript" canvas="myCanvas">
-var music= document.getElementById(   'bmusic' );
-music.src= "DST-AngryMod.ogg";
-    // Create a Paper.js Path to draw a line into it:
-    var path = new Path();
-    // Give the stroke a color
-    path.strokeColor = 'black';
-    var start = new Point(100, 100);
-    // Move to start and draw a line from there
-    path.moveTo(start);
-    // Note the plus operator on Point objects.
-    // PaperScript does that for us, and much more!
-    path.lineTo(start + [ 100, -50 ]);
-  </script>
-</head><body>
-Plays a music track. <br>
-<canvas id="myCanvas" resize=""></canvas>
-</body></html>
+    <script type="text/paperscript" canvas="myCanvas">
+      // Get the music element.
+      var music= document.getElementById(   'bmusic' );
+      // Start playing the music.
+      music.src= "DST-AngryMod.ogg";
+      // Create a Paper.js Path to draw a line into it:
+      var path = new Path();
+      // Give the stroke a color
+      path.strokeColor = 'black';
+      var start = new Point(100, 100);
+      // Move to start and draw a line from there
+      path.moveTo(start);
+      // Note the plus operator on Point objects.
+      // PaperScript does that for us, and much more!
+      path.lineTo(start + [ 100, -50 ]);
+    </script>
+  </head>
+  <body>
+    Plays a music track. <br>
+    <canvas id="myCanvas" resize=""></canvas>
+  </body>
+</html>
