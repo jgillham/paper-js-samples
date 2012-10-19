@@ -1,16 +1,16 @@
 <!--
   Author: Josh Gillham
-  Version: 9-24-12
+  Version: 10-15-12
   Descriptio:
     Repeatly fires up to 5 bullets.
 
-    Ensure that apple.bmp is in the same folder.
+    Ensure that bullet.bmp is in the same folder.
 -->
 <!DOCTYPE html>
 <html>
   <head>
     <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-    <title>Moving apple</title>
+    <title>Bullet Range</title>
 
     <!-- Load Paper.js libray -->
     <script type="text/javascript" src="paper.js"></script>
@@ -57,7 +57,7 @@
        */
       function Bullet( position, angle, speed ) {
         // Load the image.
-        var img= new Raster( 'apple' );
+        var img= new Raster( 'bullet' );
         // Set the image position
         img.position= position;
         return {
@@ -72,9 +72,10 @@
     </script>
   </head>
   <body>
+    Fires 4 bullets.<br> 
     <!-- Link the canvas -->
     <canvas id="myCanvas" resize=""></canvas>
     <!-- Embed the image resource -->
-    <img style="width: 32px; height: 32px; Display: none;" alt="" src="apple.bmp" id="apple">
+    <img style="width: 32px; height: 32px; Display: none;" alt="" src="bullet.bmp" id="bullet">
   </body>
 </html>

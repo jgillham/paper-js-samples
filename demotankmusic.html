@@ -1,10 +1,11 @@
 <!DOTYPE html>
 <!--
   Author: Josh Gillham, Bryan Preciado
-  Version: 9-16-12
+  Version: 10-18-12
   Description:
+  Plays background music.
 
-  Draws a triangle (the character) on the page. 
+  Draws a tank (the character) on the page. 
 
   The player (he) can move the character forward by pressing the 'up' key. He can brake or reverse the character by pressing the 'down' key. He can turn the character by pressing the 'left' and 'right' keys.
 
@@ -30,12 +31,18 @@
           Notice the name of the canvas.    
     -->
     <script type="text/paperscript" canvas="myCanvas">
-var music= document.getElementById(   'bmusic' );
-var musicTracks= [ "DST-AngryMod.ogg", "DST-DXT.ogg" ];
-var currentTrack= 0;
-music.src= musicTracks[ currentTrack ];
-var counter= 0;
-var musicInterval= 700;
+      // Get the embedded music.
+      var music= document.getElementById(   'bmusic' );
+      // Here's our array of tracks.
+      var musicTracks= [ "DST-AngryMod.ogg", "DST-DXT.ogg" ];
+      // The current track is set.
+      var currentTrack= 0;
+      // Start playing the music
+      music.src= musicTracks[ currentTrack ];
+      // Initialize the counter.
+      var counter= 0;
+      // Set how often we will chang tracks.
+      var musicInterval= 700;
       // Had a problem with the following lines not sizing
       //  the window properly.
       var canvas= document.getElementById(   'myCanvas' );
@@ -86,20 +93,23 @@ var musicInterval= 700;
         } else {
           character.stop();
         }
-if( counter == musicInterval - 5 ) {
-
-if( ++currentTrack == musicTracks.length ) {
-	currentTrack= 0;
-}
-music.src= musicTracks[ currentTrack ];
-
-}
-if( counter == musicInterval ) {
-counter= -1;
-music.src= musicTracks[ currentTrack ];
-
-}
-++counter;
+        // We need to set the next track an extra time b/c JS is stupid.
+        if( counter == musicInterval - 5 ) {
+          // Loop back to the first track after the end.
+          if( ++currentTrack == musicTracks.length ) {
+            currentTrack= 0;
+          }
+          // Change tracks.
+          music.src= musicTracks[ currentTrack ];
+        }
+        // Change tracks a second time.
+        if( counter == musicInterval ) A
+          // Reset the counter.
+          counter= -1;
+          // Change tracks the second time.
+          music.src= musicTracks[ currentTrack ];
+        }
+        ++counter;
       }
 
       /**

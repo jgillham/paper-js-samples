@@ -1,16 +1,16 @@
 <!--
   Author: Josh Gillham
-  Version: 9-24-12
+  Version: 10-15-12
   Descriptio:
-    Draws an apple image onto the canvasi and moves it acrossed the screen.
+    Draws an bullet image onto the canvas and moves it acrossed the screen.
 
-    Ensure that apple.bmp is in the same folder.
+    Ensure that bullet.bmp is in the same folder.
 -->
 <!DOCTYPE html>
 <html>
   <head>
     <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-    <title>Moving apple</title>
+    <title>Moving Bullet</title>
 
     <!-- Load Paper.js libray -->
     <script type="text/javascript" src="paper.js"></script>
@@ -18,7 +18,7 @@
     <!-- Start Paperscript -->
     <script type="text/paperscript" canvas="myCanvas">
       // Load the apple image
-      var img= new Raster( 'apple' );
+      var img= new Raster( 'bullet' );
       // Put it in the center of the canvas 
       img.position= view.bounds.center;
       // Called every 1/60th of a second.
@@ -29,9 +29,10 @@
     </script>
   </head>
   <body>
+    Shows a bullet moving acrossed the screen.<br>
     <!-- Link the canvas -->
     <canvas id="myCanvas" resize=""></canvas>
     <!-- Embed the image resource -->
-    <img style="width: 32px; height: 32px; Display: none;" alt="" src="apple.bmp" id="apple">
+    <img style="width: 32px; height: 32px; Display: none;" alt="" src="bullet.bmp" id="bullet">
   </body>
 </html>
