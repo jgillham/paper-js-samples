@@ -1,0 +1,333 @@
+<!DOTYPE html>
+<!--
+  Author: Josh Gillham, Bryan Preciado
+  Version: 9-16-12
+  Description:
+
+  Draws a triangle (the character) on the page. 
+
+  The player (he) can move the character forward by pressing the 'up' key. He can brake or reverse the character by pressing the 'down' key. He can turn the character by pressing the 'left' and 'right' keys.
+
+
+  The default html coding must be present (or we can't open this in a browser). The paperscript codes are written in the header but they may also be written in the body. The header will force the codes load while the body may not.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Browser Game</title>
+    <style type="text/css" media="screen">
+        canvas, img { display:block; margin:1em ; border:1px solid black; }
+            canvas { background:url(d.jpg) }
+              </style>
+
+    <!-- Load Paper.js libray. 
+          Notice 'src' must be the relative path of the filename.
+    -->
+    <script type="text/javascript" src="paper.js"></script>
+
+    <!-- Signals the start of a paperscript. 
+          Notice the name of the canvas.    
+    -->
+    <script type="text/paperscript" canvas="myCanvas">
+      // Had a problem with the following lines not sizing
+      //  the window properly.
+      var canvas= document.getElementById(   'myCanvas' );
+      canvas.width  = window.innerWidth - 40;
+      canvas.height = window.innerHeight - 40;
+// Get a rectangle for the outside border.
+      var canvasRect= new Path.Rectangle( 2, 2, canvas.width - 25, canvas.height );
+      // So we can see the border.
+      canvasRect.strokeColor= 'red';
+      canvasRect.visible= true;
+
+      // Sets the speed for the bullet
+      var BULLET_SPEED= 20;
+      // Limits the bullets the player can shoot. 
+      var MAX_PLAYER_BULLETS= 5;
+      // Holds all the bullets in the game.
+      var allBullets= new Array();
+
+      /**
+       * onFrame is called every time paper draws on
+       *  the canvas.
+       */
+      function onFrame(){
+        // Handle key-presses
+        if( Key.isDown( 'left' ) ) {
+          character.turnLeft();
+        }
+
+        if( Key.isDown( 'right' ) ) {
+          character.turnRight();
+        }
+
+        if( Key.isDown( 'up' ) ) {
+          character.accel();
+        }
+
+        if( Key.isDown( 'down' ) ) {
+          character.decel();
+        }
+
+        if( Key.isDown( 'space' ) ) {
+          character.shootBullet();
+        }
+
+        var preview= character.previewChanges();
+        //alert( uneval( character ) );
+
+        var hasCollided= false;
+        for(var i= 0; i < objects.length; i++ ) {
+          if( objects[ i ].containsPath( preview ) ) {
+            hasCollided= true;
+	  }
+        }
+        var canvasRect= new Rectangle( 0, 0, canvas.width, canvas.height );
+        var points= preview.segments;
+        for( var i= 0; i < points.length; ++i ) {
+          if( !canvasRect.contains( points[ i ].point ) ) {
+            hasCollided= true;
+          }
+        }
+        preview.remove();
+
+        if( !hasCollided ) {
+          character.update( );
+        } else {
+          character.stop();
+        }
+        // Loop through all bullets.
+        for( var i= 0; i < allBullets.length; ++i ) {
+		// Move each bullet acrossed the screen.
+            allBullets[ i ].update();
+if( canvasRect.bounds.contains( allBullets[ i ].image.bounds ) ) {
+}
+        }
+      }
+
+      /**
+       * Creates a new bullet with these params. The image is loaded and
+       *  placed at position. Everytime update is called, bullet is moved
+       *  by angle at speed.
+       *
+       * @arg position the starting position.
+       * @arg angle the starting angle.
+       * @arg speed the starting speed.
+       * 
+       * @return a new instance of Bullet with the following methods:
+       *  -update() moves the bullet.
+       */
+      function Bullet( position, angle, speed ) {
+        // Load the image.
+        var img= new Raster( 'bullet' );
+        // Set the image position
+        img.position= position;
+        return {
+          /**
+           * Moves the bullet along angle at a speed.
+           */
+          update: function() {
+            img.position+= new Point( { angle: angle, length: speed } );
+          },
+          image: img
+        };
+      }
+
+      /**
+       * This syntax makes Character behave like a class. The
+       *  parameters behave like a constructor.
+       *
+       * @param startX is the starting X coordinate
+       * @param startY is the starting Y coordinate
+       * @return the object with the data and methods.
+       */
+      function Character( startX, startY ) {
+        //BEGIN private fields
+        var TURN_RATE= 5;                           // Constant
+        var ACCELERATION= 0.2;                      // Constant
+        var MAX_SPEED= 4;                           // Constant
+
+        var CHARACTER_WIDTH= 10;                    // Constant
+        var CHARACTER_HEIGHT= 40;                   // Constant
+        var NORTH= -90.0;                           // Constant
+        var FRICTION= 0.966;
+
+
+        // NOTE: always surround division '/' with parantheses. VERY BAD!
+        var top= startY - (CHARACTER_HEIGHT / 2);   // Top Y-coordinate
+        var bottom= startY + (CHARACTER_HEIGHT / 2);// Bottom Y-coordinate
+        var left= startX - (CHARACTER_WIDTH / 2);   // Left X-coordinate
+        var right= startX + (CHARACTER_WIDTH / 2);  // Right X-coordinate
+        var speed= 0.0;                             // Starting
+        var angle= NORTH + 180;                           // Starting
+        var angleChange= 0.0;
+        //END private fields
+        var myPath= new Path();
+
+
+
+        //BEGIN constructor
+        var img= new Raster( 'tank' );
+        var newPosition= view.bounds.center;
+        newPosition.x-= img.width;
+        newPosition.y-= img.height;
+        img.position= newPosition;
+        var hitBox= Path.Rectangle( new Point( newPosition.x - ( img.width / 2 ), newPosition.y - ( img.height / 2 ) ), 
+                                  new Point( newPosition.x + ( img.width / 2 ), newPosition.y + ( img.height / 2 ) ) );
+        hitBox.strokeColor= 'black';
+        hitBox.visible= true;
+        //new Point( startx, starty );
+        //END constructor
+
+        /**
+         * Here there are the methods for this class.
+         *
+         * @return is used to provide the object.
+         */
+        // Open curly-brace without a name signals an object.
+        // NOTE: do not put a space b/t return and '{'. VERY BAD!
+        return {
+          // Here we define position as an anonomous class
+          position:
+          // This function sets position to an instance of the class
+          // The arguments are copied to private fields
+          ( function( xPos, yPos ){ 
+            //BEGIN private fields
+            var xPosition= xPos;
+            var yPosition= yPos;
+            //END private fields
+
+            // Here are the properties for this anonomous class
+            return {
+              x: this.xPosition,
+              y: this.yPosition
+            };
+          // Here we call the function with the parameters from Character
+          // This will return the object with the x and y properties
+          } )( startX, startY ),
+          // Define turnRight as a method which rotates the character
+          turnRight: function() {
+            angleChange+= TURN_RATE;
+          },
+          shootBullet: function() {
+            if( allBullets.length < MAX_PLAYER_BULLETS ) {
+              var bullet= new Bullet( img.bounds.center, angle, BULLET_SPEED );
+              allBullets.push( bullet );
+            }
+          },
+          // Define turnRight as a method which rotates the character
+          turnLeft: function() {
+            angleChange-= TURN_RATE;
+          },
+          // Define accel as method which increases the speed
+          //  but does not actually move the character.
+          accel: function() {
+            if( speed + ACCELERATION < MAX_SPEED ) {
+              speed+= ACCELERATION;
+            }
+          },
+          // Define decel as a method which decreases the speed
+          //  but does not actually move the character
+          decel: function(){
+            if( speed - ACCELERATION > -MAX_SPEED ) {
+              speed-= ACCELERATION;
+            }
+          },
+
+          // Define update as a method which will translate the
+          //  character at his current speed
+          updatei: function( oldPath ) {
+            if( angleChange !== 0.0 ) {
+              oldPath.rotate( angleChange );
+            }
+            if( speed > 0 ) {
+              oldPath.position+= new Point( { angle: angle, length: speed*FRICTION } );
+            } else if( speed < 0 ) {
+              oldPath.position-= new Point( { angle: angle, length: speed*FRICTION } );
+            }
+          },
+          update: function(){
+            angle+= angleChange;
+            this.updatei( img );
+            this.updatei( hitBox );
+	    speed*=FRICTION;
+            angleChange= 0.0;
+          },
+
+	  speed: speed,
+	  angle: angle,
+
+          path: myPath,
+
+          stop: function() {
+            speed= 0;
+            angleChange= 0.0;
+          },
+          previewChanges: function() {
+            //var clone= eval( uneval( this ) );
+            //var char= this.clone();
+            var newPath= hitBox.clone();
+            this.updatei( newPath );
+            return newPath;
+            //return this;
+          }
+        };
+      }
+
+      function Block( left, top, right, bottom ) {
+	var border= Path.Rectangle( new Point( left, top ), 
+                                    new Point( right, bottom ) );
+	border.closed= true;
+	border.strokeColor= 'black';
+        border.visible= true;
+        var img= new Raster( 'hangor' );
+        img.position.x= left;
+        img.position.y= top;
+        img.fitBounds( border.bounds );
+        return {
+          left: left,
+          top: top,
+          right: right,
+          bottom: bottom,
+          contains: function( point ) {
+            if( point.x >= left &&
+                point.x <= right &&
+                point.y >= top &&
+                point.y <= bottom ) {
+              return true;
+            }
+            return false;
+          },
+          containsPath: function( path  ) {
+            var segmentsArray= path.segments;
+            // BEWARE without var this references the i in onFrame()
+            for(var i= 0; i < segmentsArray.length; i++ ) {
+              if( this.contains( segmentsArray[i].point ) ) {
+	        return true;
+              }
+            }
+            return false;
+          }
+        };
+      }
+
+      // Generate a plethora of triangles at random positions
+      var objects= new Array();
+      for( var i= 0; i< 3; ++i ){
+        var x= Math.floor( ( Math.random() * ( canvas.width - 100 ) ) + 50 );
+        var y= Math.floor( ( Math.random() * ( canvas.height - 100 ) ) + 50 );  
+        objects.push( new Block( x, y, x + 50, y + 50 ) ); 
+      }
+
+      // Create a new instance of Character
+      var character= new Character( 200, 200 );
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas" resize="" ></canvas>
+    <!-- Embed the image resource -->
+    <img style="width: 32px; height: 32px; Display: none;" alt="" src="bullet.bmp" id="bullet">
+    <img style="width: 32px; height: 32px; Display: none;" alt="" src="tank.gif" id="tank">
+    <img style="width: 32px; height: 32px; Display: none;" alt="" src="hangor.gif" id="hangor">
+  </body>
+</html>
