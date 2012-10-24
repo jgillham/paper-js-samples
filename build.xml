@@ -1,0 +1,13 @@
+<project name="tank">
+  <target name="clean">
+    <delete file="out.html"/>
+
+  </target>
+  <target name="build" depends="clean">
+    <concat destfile="out.html">
+      <fileset file="top-html.txt"/>
+      <fileset file="in.js"/>
+      <fileset file="bottom-html.txt"/>
+    </concat>
+  </target>
+</project>
